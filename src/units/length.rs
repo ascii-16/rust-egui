@@ -16,18 +16,22 @@ impl Unit for LengthUnit {
         LengthUnit::Feet,
     ];
 
-    fn to_base_factor(&self) -> f64 {
+    fn to_base(&self, value: f64) -> f64 {
         match self {
-            LengthUnit::Meters => 1.0,
-            LengthUnit::Kilometers => 1_000.0,
-            LengthUnit::Miles => 1_609.344,
-            LengthUnit::Feet => 0.3048,
+            LengthUnit::Meters => value * 1.0,
+            LengthUnit::Kilometers => value * 1_000.0,
+            LengthUnit::Miles => value * 1_609.344,
+            LengthUnit::Feet => value * 0.3048,
         }
     }
 
-    fn convert(&self, from: f64, to: &Self) -> f64 {
-        let in_meters = from * self.to_base_factor();
-        return in_meters / to.to_base_factor();
+    fn from_base(&self, value: f64) -> f64 {
+        match self {
+            LengthUnit::Meters => value / 1.0,
+            LengthUnit::Kilometers => value / 1_000.0,
+            LengthUnit::Miles => value / 1_609.344,
+            LengthUnit::Feet => value / 0.3048,
+        }
     }
 }
 
