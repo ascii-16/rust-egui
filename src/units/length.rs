@@ -1,3 +1,5 @@
+use super::unit::Unit;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum LengthUnit {
     Meters,
@@ -6,15 +8,15 @@ pub enum LengthUnit {
     Feet,
 }
 
-impl LengthUnit {
-    pub const ALL: [LengthUnit; 4] = [
+impl Unit for LengthUnit {
+    const ALL: &'static [Self] = &[
         LengthUnit::Meters,
         LengthUnit::Kilometers,
         LengthUnit::Miles,
         LengthUnit::Feet,
     ];
 
-    pub fn to_meters_factor(self) -> f64 {
+    fn to_base_factor(&self) -> f64 {
         match self {
             LengthUnit::Meters => 1.0,
             LengthUnit::Kilometers => 1_000.0,
@@ -23,9 +25,9 @@ impl LengthUnit {
         }
     }
 
-    pub fn convert(self, from: f64, to: LengthUnit) -> f64 {
-        let in_meters = from * self.to_meters_factor();
-        return in_meters / to.to_meters_factor();
+    fn convert(&self, from: f64, to: &Self) -> f64 {
+        let in_meters = from * self.to_base_factor();
+        return in_meters / to.to_base_factor();
     }
 }
 

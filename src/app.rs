@@ -1,16 +1,16 @@
 use iced::{Element, Task};
-use rust_egui::{categories::length::LengthUnit, state::message::Message, ui::converter_view};
+use rust_egui::{state::message::Message, ui::converter_view, units::{unit::Unit}};
 
 #[derive(Default)]
-pub struct MyApp {
+pub struct MyApp <U: Unit + 'static> {
     pub input_value: String,
-    pub from_unit: LengthUnit,
-    pub to_unit: LengthUnit,
+    pub from_unit: U,
+    pub to_unit: U,
     pub result: f64,
 }
 
-impl MyApp {
-    pub fn update(&mut self, message: Message) -> Task<Message> {
+impl<U: Unit> MyApp<U> {
+    pub fn update(&mut self, message: Message<U>) -> Task<Message<U>> {
         match message {
             Message::InputChanged(val) => self.input_value = val,
             Message::FromUnitChanged(unit) => self.from_unit = unit,
@@ -18,14 +18,14 @@ impl MyApp {
             Message::SwapUnits => std::mem::swap(&mut self.from_unit, &mut self.to_unit),
             Message::Convert => {
                 if let Ok(v) = self.input_value.parse::<f64>() {
-                    self.result = self.from_unit.convert(v, self.to_unit);
+                    self.result = self.from_unit.convert(v, &self.to_unit);
                 }
             }
         }
         Task::none()
     }
 
-    pub fn view(&self) -> Element<Message> {
-        converter_view::converter_view(&self.input_value, self.from_unit, self.to_unit, self.result)
+    pub fn view(&self) -> Element<Message<U>> {
+        converter_view::converter_view(&self.input_value, self.from_unit.clone(), self.to_unit.clone(), self.result)
     }
 }

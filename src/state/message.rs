@@ -1,8 +1,10 @@
+use crate::units::unit::Unit;
+
 #[derive(Debug, Clone)]
-pub enum Message {
+pub enum Message<U: Unit> {
     InputChanged(String),
-    FromUnitChanged(crate::categories::length::LengthUnit),
-    ToUnitChanged(crate::categories::length::LengthUnit),
+    FromUnitChanged(U),
+    ToUnitChanged(U),
     SwapUnits,
     Convert,
 }
