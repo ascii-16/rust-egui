@@ -19,14 +19,6 @@ impl Default for MyApp {
     fn default() -> Self {
         let category = Category::Length;
         let units = AnyUnit::items_by_category(category);
-        println!(
-            "sss: {}",
-            units
-                .iter()
-                .map(|u| u.to_string())
-                .collect::<Vec<_>>()
-                .join(", ")
-        );
         Self {
             category,
             input_value: String::new(),
@@ -42,7 +34,12 @@ impl MyApp {
     pub fn update(&mut self, message: Message) -> Task<Message> {
         match message {
             Message::InputChanged(val) => self.input_value = val,
-            Message::CategoryChanged(val) => self.category = val,
+            Message::CategoryChanged(val) => {
+                self.category = val;
+                self.units = AnyUnit::items_by_category(val);
+                self.from_unit = self.units[0];
+                self.to_unit = self.units[1];
+            }
             Message::FromUnitChanged(unit) => self.from_unit = unit,
             Message::ToUnitChanged(unit) => self.to_unit = unit,
             Message::SwapUnits => std::mem::swap(&mut self.from_unit, &mut self.to_unit),
