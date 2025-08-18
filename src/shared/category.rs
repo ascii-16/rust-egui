@@ -11,8 +11,8 @@ impl Category {
     pub const ALL: [Category; 3] = [Category::Length, Category::Temperature, Category::Weight];
 }
 
-impl fmt::Display for Category  {
-      fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+impl fmt::Display for Category {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let name = match self {
             Category::Length => "Length",
             Category::Temperature => "Temperature",

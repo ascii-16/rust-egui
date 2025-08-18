@@ -19,14 +19,14 @@ impl Default for MyApp {
     fn default() -> Self {
         let category = Category::Length;
         let units = AnyUnit::items_by_category(category);
-    println!(
-"sss: {}",
-units
-    .iter()
-    .map(|u| u.to_string())
-    .collect::<Vec<_>>()
-    .join(", ")
-);
+        println!(
+            "sss: {}",
+            units
+                .iter()
+                .map(|u| u.to_string())
+                .collect::<Vec<_>>()
+                .join(", ")
+        );
         Self {
             category,
             input_value: String::new(),

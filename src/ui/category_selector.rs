@@ -6,8 +6,11 @@ use crate::state::message::Message;
 
 pub fn category_selector(category: Category) -> Element<'static, Message> {
     column![
-      text("Select category").size(18),
-      pick_list(&Category::ALL[..], Some(category), Message::CategoryChanged)
-                .width(Length::Fixed(120.0))
-    ].spacing(15).align_x(Alignment::Center).into()
+        text("Select category").size(18),
+        pick_list(&Category::ALL[..], Some(category), Message::CategoryChanged)
+            .width(Length::Fixed(120.0))
+    ]
+    .spacing(15)
+    .align_x(Alignment::Center)
+    .into()
 }

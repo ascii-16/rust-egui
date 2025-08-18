@@ -1,8 +1,8 @@
-use std::fmt;
 use crate::{
     shared::category::Category,
     units::{length::LengthUnit, temperature::TemperatureUnit, unit::Unit, weight::WeightUnit},
 };
+use std::fmt;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum AnyUnit {
