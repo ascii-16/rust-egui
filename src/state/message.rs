@@ -1,10 +1,11 @@
-use crate::units::unit::Unit;
+use crate::{shared::{any_unit::AnyUnit, category::Category}};
 
 #[derive(Debug, Clone)]
-pub enum Message<U: Unit> {
+pub enum Message {
     InputChanged(String),
-    FromUnitChanged(U),
-    ToUnitChanged(U),
+    CategoryChanged(Category),
+    FromUnitChanged(AnyUnit),
+    ToUnitChanged(AnyUnit),
     SwapUnits,
     Convert,
 }
