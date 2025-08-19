@@ -19,23 +19,52 @@ pub fn converter_view<'a>(
             row![
                 text_input("Enter value", input_value)
                     .on_input(Message::InputChanged)
-                    .width(iced::Length::Fixed(150.0)),
+                    .width(iced::Length::Fixed(150.0))
+                    .style(|theme, status| {
+                        let mut style = text_input::default(theme, status);
+                        style.border.radius = 6.0.into();
+                        style
+                    }),
                 pick_list(units, Some(*from_unit), Message::FromUnitChanged)
                     .width(iced::Length::Fixed(120.0))
+                    .style(|theme, status| {
+                        let mut style = pick_list::default(theme, status);
+                        style.border.radius = 6.0.into();
+                        style
+                    })
             ]
             .spacing(10)
             .align_y(Alignment::Center),
-            row![button("⇆ Swap").on_press(Message::SwapUnits)]
-                .spacing(5)
-                .align_y(Alignment::Center),
+            row![
+                button("⇆ Swap")
+                    .on_press(Message::SwapUnits)
+                    .style(|theme, status| {
+                        let mut style = button::secondary(theme, status);
+                        style.border.radius = 6.0.into();
+                        style
+                    })
+            ]
+            .spacing(5)
+            .align_y(Alignment::Center),
             row![
                 text(format!("{:.4}", result)).size(20),
                 pick_list(units, Some(*to_unit), Message::ToUnitChanged)
                     .width(Length::Fixed(120.0))
+                    .style(|theme, status| {
+                        let mut style = pick_list::default(theme, status);
+                        style.border.radius = 6.0.into();
+                        style
+                    })
             ]
             .spacing(10)
             .align_y(Alignment::Center),
-            button("Convert").on_press(Message::Convert)
+            button("Convert")
+                .on_press(Message::Convert)
+                .style(|theme, status| {
+                    let mut style = button::primary(theme, status);
+                    style.border.radius = 6.0.into();
+                    style
+                })
         ]
         .spacing(15)
         .align_x(Alignment::Start),
@@ -47,7 +76,7 @@ pub fn converter_view<'a>(
             radius: Radius::from(12.0),
         },
         background: Some(iced::Background::Color(iced::Color::from_rgba(
-            0.9, 0.95, 1.0, 0.0
+            0.9, 0.95, 1.0, 0.0,
         ))),
         text_color: None,
         ..Default::default()
