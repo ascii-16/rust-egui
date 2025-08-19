@@ -1,9 +1,11 @@
 use iced::{
-    widget::{column, container, row, text, Space}, Element, Length, Task
+    Element, Length, Task,
+    widget::{Space, column, container, row, text},
 };
 use rust_egui::{
     shared::{any_unit::AnyUnit, category::Category},
     state::message::Message,
+    store::store::{Conversion, save_conversion},
     ui::{category_selector, converter_view},
 };
 
@@ -48,6 +50,14 @@ impl MyApp {
                 if let Ok(v) = self.input_value.parse::<f64>() {
                     self.result = self.from_unit.convert(v, &self.to_unit);
                 }
+
+                let conversion = Conversion {
+                    value: self.result,
+                    category: self.category.to_string(),
+                    from_unit: self.from_unit.to_string(),
+                    to_unit: self.to_unit.to_string(),
+                };
+                let _ = save_conversion(&conversion);
             }
         }
         Task::none()

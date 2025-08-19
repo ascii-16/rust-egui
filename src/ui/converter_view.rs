@@ -23,6 +23,7 @@ pub fn converter_view<'a>(
                 text_input("Enter value", input_value)
                     .on_input(Message::InputChanged)
                     .width(Length::Fixed(348.0))
+                    .padding(8)
                     .style(rounded_input_style)
             ]
             .spacing(10)
