@@ -1,6 +1,5 @@
 use iced::{
-    Element, Task,
-    widget::{column, container, text},
+    widget::{column, container, row, text, Space}, Element, Length, Task
 };
 use rust_egui::{
     shared::{any_unit::AnyUnit, category::Category},
@@ -58,14 +57,17 @@ impl MyApp {
         container(
             column![
                 text("Unit Converter").size(24),
-                category_selector::category_selector(self.category),
-                converter_view::converter_view(
-                    &self.input_value,
-                    &self.from_unit,
-                    &self.to_unit,
-                    &self.units,
-                    self.result
-                )
+                row![
+                    category_selector::category_selector(self.category),
+                    Space::with_width(Length::Fixed(16.0)),
+                    converter_view::converter_view(
+                        &self.input_value,
+                        &self.from_unit,
+                        &self.to_unit,
+                        &self.units,
+                        self.result
+                    )
+                ]
             ]
             .spacing(20),
         )
