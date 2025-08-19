@@ -1,11 +1,13 @@
-use iced::{Element, Task, widget::column};
+use iced::{
+    Element, Task,
+    widget::{column, container, text},
+};
 use rust_egui::{
     shared::{any_unit::AnyUnit, category::Category},
     state::message::Message,
     ui::{category_selector, converter_view},
 };
 
-// #[derive(Default)]
 pub struct MyApp {
     pub category: Category,
     pub input_value: String,
@@ -53,17 +55,21 @@ impl MyApp {
     }
 
     pub fn view(&self) -> Element<Message> {
-        column![
-            category_selector::category_selector(self.category),
-            converter_view::converter_view(
-                &self.input_value,
-                &self.from_unit,
-                &self.to_unit,
-                &self.units,
-                self.result
-            )
-        ]
-        .spacing(20)
+        container(
+            column![
+                text("Unit Converter").size(24),
+                category_selector::category_selector(self.category),
+                converter_view::converter_view(
+                    &self.input_value,
+                    &self.from_unit,
+                    &self.to_unit,
+                    &self.units,
+                    self.result
+                )
+            ]
+            .spacing(20),
+        )
+        .padding(20)
         .into()
     }
 }
