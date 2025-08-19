@@ -1,5 +1,5 @@
 use iced::widget::{Column, Container, button, column, text};
-use iced::{Alignment, Border, Color, Element};
+use iced::{Alignment, Border, Color, Element, Length};
 
 use crate::shared::category::Category;
 use crate::state::message::Message;
@@ -26,13 +26,19 @@ pub fn category_selector(category: Category) -> Element<'static, Message> {
     );
     column![
         Container::new(list)
-            .padding(8)
+            .padding(16)
+            .width(Length::Fixed(230.0))
             .style(|_| iced::widget::container::Style {
                 border: Border {
                     radius: 8.0.into(),
                     width: 1.0,
-                    color: Color::from_rgb8(200, 200, 200),
+                    color: Color::from_rgb(30.0 / 255.0, 30.0 / 255.0, 30.0 / 255.0),
                 },
+                background: Some(iced::Background::Color(Color::from_rgb(
+                    30.0 / 255.0,
+                    30.0 / 255.0,
+                    30.0 / 255.0
+                ))),
                 ..Default::default()
             })
     ]
