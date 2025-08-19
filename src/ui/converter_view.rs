@@ -4,6 +4,9 @@ use iced::{Alignment, Element, Length, Theme};
 
 use crate::shared::any_unit::AnyUnit;
 use crate::state::message::Message;
+use crate::ui::rounded_component_styles::{
+    rounded_button_style, rounded_input_style, rounded_pick_list_style,
+};
 
 // Borrow is completed when this function returns Element
 // so need to specify a lifetime ('a here)
@@ -20,18 +23,10 @@ pub fn converter_view<'a>(
                 text_input("Enter value", input_value)
                     .on_input(Message::InputChanged)
                     .width(iced::Length::Fixed(150.0))
-                    .style(|theme, status| {
-                        let mut style = text_input::default(theme, status);
-                        style.border.radius = 6.0.into();
-                        style
-                    }),
+                    .style(rounded_input_style),
                 pick_list(units, Some(*from_unit), Message::FromUnitChanged)
                     .width(iced::Length::Fixed(120.0))
-                    .style(|theme, status| {
-                        let mut style = pick_list::default(theme, status);
-                        style.border.radius = 6.0.into();
-                        style
-                    })
+                    .style(rounded_pick_list_style)
             ]
             .spacing(10)
             .align_y(Alignment::Center),
@@ -39,9 +34,7 @@ pub fn converter_view<'a>(
                 button("⇆ Swap")
                     .on_press(Message::SwapUnits)
                     .style(|theme, status| {
-                        let mut style = button::secondary(theme, status);
-                        style.border.radius = 6.0.into();
-                        style
+                        rounded_button_style(theme, status, Some(button::secondary))
                     })
             ]
             .spacing(5)
@@ -50,20 +43,14 @@ pub fn converter_view<'a>(
                 text(format!("{:.4}", result)).size(20),
                 pick_list(units, Some(*to_unit), Message::ToUnitChanged)
                     .width(Length::Fixed(120.0))
-                    .style(|theme, status| {
-                        let mut style = pick_list::default(theme, status);
-                        style.border.radius = 6.0.into();
-                        style
-                    })
+                    .style(rounded_pick_list_style)
             ]
             .spacing(10)
             .align_y(Alignment::Center),
             button("Convert")
                 .on_press(Message::Convert)
                 .style(|theme, status| {
-                    let mut style = button::primary(theme, status);
-                    style.border.radius = 6.0.into();
-                    style
+                    rounded_button_style(theme, status, Some(button::primary))
                 })
         ]
         .spacing(15)
