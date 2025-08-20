@@ -6,7 +6,7 @@ A simple and modern unit converter desktop app built with Rust and the [iced](ht
 
 ## Screenshots
 
-*(Add screenshots here if available)*
+![App Screenshot](https://example.com/screenshot.png)
 
 ## Getting Started
 
