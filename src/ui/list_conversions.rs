@@ -58,7 +58,7 @@ fn card_style(_theme: &Theme) -> container::Style {
         border: Border {
             radius: 12.0.into(),
             width: 1.0,
-            color: Color::from_rgba(1.0, 1.0, 1.0, 0.08),
+            color: Color::from_rgb(0.12, 0.12, 0.12),
         },
         text_color: None,
         ..Default::default()
