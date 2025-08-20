@@ -1,4 +1,4 @@
-# rust-iced-converter
+# rust-iced-unit-converter
 
 A simple and modern unit converter desktop app built with Rust and the [iced](https://github.com/iced-rs/iced) GUI framework.
 
@@ -17,8 +17,8 @@ A simple and modern unit converter desktop app built with Rust and the [iced](ht
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/ascii-16/rust-egui.git
-   cd rust-egui
+   git clone https://github.com/ascii-16/rust-egui.git](https://github.com/ascii-16/rust-iced-unit-converter.git
+   cd rust-iced-unit-converter
    ```
 2. Create the data dir:
    ```sh
