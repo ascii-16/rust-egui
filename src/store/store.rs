@@ -18,7 +18,7 @@ pub fn save_conversion(conversion: Conversion) -> std::io::Result<()> {
             Vec::new()
         };
 
-    conversions.push(conversion);
+    conversions.insert(0,conversion);
 
     let json = serde_json::to_string_pretty(&conversions)?;
     fs::write("data/conversions.json", json)?;
@@ -28,7 +28,6 @@ pub fn save_conversion(conversion: Conversion) -> std::io::Result<()> {
 pub fn load_conversion() -> Vec<Conversion> {
     let data =
         fs::read_to_string("data/conversions.json").expect("Unable to read conversions.json");
-    println!("{}", data);
 
     let conversions: Vec<Conversion> =
         serde_json::from_str(&data).expect("JSON was not well-formatted");
