@@ -13,7 +13,7 @@ pub fn category_selector(category: Category) -> Element<'static, Message> {
             let is_selected = *cat == category;
 
             col.push(
-                button(Container::new(text(cat.to_string()).size(14)).padding(4))
+                button(Container::new(text(cat.to_string()).size(12)).padding(2))
                     .on_press(Message::CategoryChanged(cat.clone()))
                     .style(move |theme, status| {
                         if is_selected {
