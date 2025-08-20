@@ -1,6 +1,6 @@
 use crate::{
     shared::category::Category,
-    units::{length::LengthUnit, temperature::TemperatureUnit, unit::Unit, weight::WeightUnit},
+    units::{length::LengthUnit, temperature::TemperatureUnit, time::TimeUnit, unit::Unit, weight::WeightUnit},
 };
 use std::fmt;
 
@@ -9,6 +9,7 @@ pub enum AnyUnit {
     Length(LengthUnit),
     Temperature(TemperatureUnit),
     Weight(WeightUnit),
+    Time(TimeUnit)
 }
 
 impl AnyUnit {
@@ -17,6 +18,7 @@ impl AnyUnit {
             AnyUnit::Length(_) => Category::Length,
             AnyUnit::Temperature(_) => Category::Temperature,
             AnyUnit::Weight(_) => Category::Weight,
+            AnyUnit::Time(_) => Category::Time,
         }
     }
 
@@ -37,6 +39,11 @@ impl AnyUnit {
                 .copied()
                 .map(AnyUnit::Weight)
                 .collect(),
+            Category::Time => TimeUnit::ALL
+                .iter()
+                .copied()
+                .map(AnyUnit::Time)
+                .collect(),
         }
     }
 
@@ -45,6 +52,7 @@ impl AnyUnit {
             AnyUnit::Length(u) => u.to_base(value),
             AnyUnit::Temperature(u) => u.to_base(value),
             AnyUnit::Weight(u) => u.to_base(value),
+            AnyUnit::Time(u) => u.to_base(value),
         }
     }
 
@@ -53,6 +61,7 @@ impl AnyUnit {
             AnyUnit::Length(u) => u.from_base(value),
             AnyUnit::Temperature(u) => u.from_base(value),
             AnyUnit::Weight(u) => u.to_base(value),
+            AnyUnit::Time(u) => u.to_base(value),
         }
     }
 
@@ -70,6 +79,7 @@ impl fmt::Display for AnyUnit {
             AnyUnit::Length(u) => write!(f, "{}", u),
             AnyUnit::Temperature(u) => write!(f, "{}", u),
             AnyUnit::Weight(u) => write!(f, "{}", u),
+            AnyUnit::Time(u) =>  write!(f, "{}", u),
         }
     }
 }

@@ -5,10 +5,11 @@ pub enum Category {
     Length,
     Temperature,
     Weight,
+    Time,
 }
 
 impl Category {
-    pub const ALL: [Category; 3] = [Category::Length, Category::Temperature, Category::Weight];
+    pub const ALL: [Category; 4] = [Category::Length, Category::Temperature, Category::Weight, Category::Time];
 }
 
 impl fmt::Display for Category {
@@ -17,6 +18,7 @@ impl fmt::Display for Category {
             Category::Length => "Length",
             Category::Temperature => "Temperature",
             Category::Weight => "Weight",
+            Category::Time => "TIme",
         };
         write!(f, "{}", name)
     }
