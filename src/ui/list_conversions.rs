@@ -1,6 +1,7 @@
 use iced::widget::{Space, column, container, row, scrollable, text};
-use iced::{Alignment, Background, Border, Color, Element, Length, Theme};
+use iced::{Alignment, Background, Border, Element, Length, Theme};
 
+use crate::shared::constant::DARK_GRAY;
 use crate::{state::message::Message, store::store::Conversion};
 
 pub fn list_conversions(conversions: &[Conversion]) -> Element<'static, Message> {
@@ -54,11 +55,11 @@ fn conversion_card(conv: &Conversion) -> Element<'static, Message> {
 
 fn card_style(_theme: &Theme) -> container::Style {
     container::Style {
-        background: Some(Background::Color(Color::from_rgb(0.12, 0.12, 0.12))),
+        background: Some(Background::Color(DARK_GRAY)),
         border: Border {
             radius: 12.0.into(),
             width: 1.0,
-            color: Color::from_rgb(0.12, 0.12, 0.12),
+            color: DARK_GRAY,
         },
         text_color: None,
         ..Default::default()
@@ -67,21 +68,18 @@ fn card_style(_theme: &Theme) -> container::Style {
 
 fn empty_state() -> Element<'static, Message> {
     container(
-        column![
-            text("No conversions yet").size(20),
-            text("Run a conversion and we'll save it here.").size(14)
-        ]
-        .spacing(8)
-        .align_x(Alignment::Center),
+        column![text("No conversions yet").size(20),]
+            .spacing(8)
+            .align_x(Alignment::Center),
     )
     .padding(40)
     .width(Length::Fill)
     .style(|_theme| container::Style {
-        background: Some(Background::Color(Color::from_rgba(1.0, 1.0, 1.0, 0.03))),
+        background: Some(Background::Color(DARK_GRAY)),
         border: Border {
             radius: 12.0.into(),
             width: 1.0,
-            color: Color::from_rgba(1.0, 1.0, 1.0, 0.06),
+            color: DARK_GRAY,
         },
         ..Default::default()
     })

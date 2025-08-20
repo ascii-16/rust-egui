@@ -1,8 +1,9 @@
 use iced::border::Radius;
 use iced::widget::{Space, button, column, container, pick_list, row, text, text_input};
-use iced::{Alignment, Color, Element, Length, Theme};
+use iced::{Alignment, Element, Length, Theme};
 
 use crate::shared::any_unit::AnyUnit;
+use crate::shared::constant::DARK_GRAY;
 use crate::state::message::Message;
 use crate::ui::rounded_component_styles::{
     rounded_button_style, rounded_input_style, rounded_pick_list_style,
@@ -66,15 +67,11 @@ pub fn converter_view<'a>(
     )
     .style(|_theme: &Theme| container::Style {
         border: iced::Border {
-            color: Color::from_rgb(30.0 / 255.0, 30.0 / 255.0, 30.0 / 255.0),
+            color: DARK_GRAY,
             width: 1.0,
             radius: Radius::from(12.0),
         },
-        background: Some(iced::Background::Color(Color::from_rgb(
-            30.0 / 255.0,
-            30.0 / 255.0,
-            30.0 / 255.0,
-        ))),
+        background: Some(iced::Background::Color(DARK_GRAY)),
         text_color: None,
         ..Default::default()
     })

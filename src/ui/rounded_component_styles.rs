@@ -1,9 +1,11 @@
 use iced::Theme;
 use iced::widget::{button, pick_list, text_input};
 
+use crate::shared::constant::DEFAULT_BORDER_RADIUS;
+
 pub fn rounded_pick_list_style(theme: &Theme, status: pick_list::Status) -> pick_list::Style {
     let mut style = pick_list::default(theme, status);
-    style.border.radius = 6.0.into();
+    style.border.radius = DEFAULT_BORDER_RADIUS.into();
     style
 }
 
@@ -18,12 +20,12 @@ pub fn rounded_button_style(
         None => button::primary(theme, status),
     };
 
-    style.border.radius = 6.0.into();
+    style.border.radius = DEFAULT_BORDER_RADIUS.into();
     style
 }
 
 pub fn rounded_input_style(theme: &Theme, status: text_input::Status) -> text_input::Style {
     let mut style = text_input::default(theme, status);
-    style.border.radius = 6.0.into();
+    style.border.radius = DEFAULT_BORDER_RADIUS.into();
     style
 }

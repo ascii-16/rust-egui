@@ -1,7 +1,8 @@
 use iced::widget::{Column, Container, button, column, text};
-use iced::{Alignment, Border, Color, Element, Length};
+use iced::{Alignment, Border, Element, Length};
 
 use crate::shared::category::Category;
+use crate::shared::constant::DARK_GRAY;
 use crate::state::message::Message;
 use crate::ui::rounded_component_styles::rounded_button_style;
 
@@ -32,13 +33,9 @@ pub fn category_selector(category: Category) -> Element<'static, Message> {
                 border: Border {
                     radius: 8.0.into(),
                     width: 1.0,
-                    color: Color::from_rgb(30.0 / 255.0, 30.0 / 255.0, 30.0 / 255.0),
+                    color: DARK_GRAY,
                 },
-                background: Some(iced::Background::Color(Color::from_rgb(
-                    30.0 / 255.0,
-                    30.0 / 255.0,
-                    30.0 / 255.0
-                ))),
+                background: Some(iced::Background::Color(DARK_GRAY)),
                 ..Default::default()
             })
     ]
