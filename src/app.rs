@@ -5,8 +5,8 @@ use iced::{
 use rust_egui::{
     shared::{any_unit::AnyUnit, category::Category},
     state::message::Message,
-    store::store::{Conversion, save_conversion},
-    ui::{category_selector, converter_view},
+    store::store::{Conversion, load_conversion, save_conversion},
+    ui::{category_selector, converter_view, list_conversions::list_conversions},
 };
 
 pub struct MyApp {
@@ -16,12 +16,15 @@ pub struct MyApp {
     pub to_unit: AnyUnit,
     pub units: Vec<AnyUnit>,
     pub result: f64,
+    pub conversions: Vec<Conversion>,
 }
 
 impl Default for MyApp {
     fn default() -> Self {
         let category = Category::Length;
         let units = AnyUnit::items_by_category(category);
+        let conversions = load_conversion();
+
         Self {
             category,
             input_value: String::new(),
@@ -29,6 +32,7 @@ impl Default for MyApp {
             to_unit: units[1],
             units,
             result: 0.0,
+            conversions,
         }
     }
 }
@@ -57,7 +61,8 @@ impl MyApp {
                     from_unit: self.from_unit.to_string(),
                     to_unit: self.to_unit.to_string(),
                 };
-                let _ = save_conversion(&conversion);
+                let _ = save_conversion(conversion);
+                self.conversions = load_conversion();
             }
         }
         Task::none()
@@ -68,16 +73,17 @@ impl MyApp {
             column![
                 text("Unit Converter").size(24),
                 row![
-                    category_selector::category_selector(self.category),
-                    Space::with_width(Length::Fixed(16.0)),
                     converter_view::converter_view(
                         &self.input_value,
                         &self.from_unit,
                         &self.to_unit,
                         &self.units,
                         self.result
-                    )
-                ]
+                    ),
+                    Space::with_width(Length::Fixed(16.0)),
+                    category_selector::category_selector(self.category),
+                ],
+                list_conversions(&self.conversions)
             ]
             .spacing(20),
         )
