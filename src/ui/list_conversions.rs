@@ -34,7 +34,7 @@ fn conversion_card(conv: &Conversion) -> Element<'static, Message> {
 
     let subtitle = text(format!("Category: {}", conv.category)).size(14);
 
-    let main_value = text(format!("{:.4} {}", conv.value, conv.from_unit)).size(16);
+    let main_value = text(format!("{:.4} {}", conv.value, conv.to_unit)).size(16);
 
     container(
         column![
