@@ -1,4 +1,4 @@
-use iced::widget::{Space, column, container, row, scrollable, text};
+use iced::widget::{button, column, container, row, scrollable, text, Space};
 use iced::{Alignment, Background, Border, Element, Length, Theme};
 
 use crate::shared::constant::DARK_GRAY;
@@ -32,17 +32,17 @@ pub fn list_conversions(conversions: &[Conversion]) -> Element<'static, Message>
 fn conversion_card(conv: &Conversion) -> Element<'static, Message> {
     let title = text(format!("{} → {}", conv.from_unit, conv.to_unit)).size(18);
 
-    let subtitle = text(format!("Category: {}", conv.category)).size(14);
+    let subtitle =   button(text(format!("{}", conv.category)).size(12));
 
-    let main_value = text(format!("{:.4} {}", conv.value, conv.to_unit)).size(16);
+    let main_value = text(format!("{:.3} {}", conv.value, conv.to_unit)).size(16);
 
     container(
         column![
             title,
             subtitle,
-            Space::with_height(Length::Fixed(6.0)),
+            Space::with_height(Length::Fixed(4.0)),
             main_value,
-            Space::with_height(Length::Fixed(12.0)),
+            Space::with_height(Length::Fixed(8.0)),
         ]
         .spacing(6)
         .align_x(Alignment::Start),

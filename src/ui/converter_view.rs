@@ -51,7 +51,7 @@ pub fn converter_view<'a>(
                 column![
                     row![
                         Space::with_width(30),
-                        text(format!("{:.4}", result)).size(60),
+                        text(format!("{:.3}", result)).size(60),
                     ],
                     row![Space::with_width(40), text(to_unit.to_string()).size(18)]
                 ],
